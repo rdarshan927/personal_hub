@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - My Digital Space</title>
+    <script src="https://unpkg.com/alpinejs@3.13.0" defer></script>
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Special+Elite&display=swap">
+    <style>
+        :root {
+            --vintage-cream: #F8F0E3;
+            --vintage-brown: #8B4513;
+            --vintage-gold: #D4AF37;
+            --vintage-burgundy: #800020;
+            --vintage-navy: #000080;
+            --vintage-green: #006400;
+            --vintage-paper: #F2E8C9;
+        }
+
+        body {
+            background-color: var(--vintage-paper);
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d0c8b0' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            color: #452F21;
+            font-family: 'Playfair Display', serif;
+        }
+
+        header,
+        footer {
+            background-color: var(--vintage-burgundy);
+            color: var(--vintage-cream);
+        }
+
+        .serif-title {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        .typewriter-text {
+            font-family: 'Special Elite', cursive;
+            line-height: 1.6;
+        }
+
+        .vintage-card {
+            background-color: var(--vintage-cream);
+            border: 1px solid #8B4513;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1), 0 0 40px rgba(139, 69, 19, 0.1) inset;
+        }
+
+        .vintage-border {
+            border: 2px solid var(--vintage-brown);
+            border-radius: 0;
+            position: relative;
+        }
+
+        .vintage-border::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid var(--vintage-gold);
+            pointer-events: none;
+        }
+
+        .vintage-button {
+            background-color: var(--vintage-burgundy);
+            color: var(--vintage-cream);
+            border: 1px solid var(--vintage-gold);
+            transition: all 0.3s ease;
+        }
+
+        .vintage-button:hover {
+            background-color: var(--vintage-cream);
+            color: var(--vintage-burgundy);
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .vintage-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--vintage-gold), transparent);
+            margin: 2rem auto;
+            width: 80%;
+        }
+
+        .ornament {
+            font-size: 2rem;
+            color: var(--vintage-gold);
+        }
+
+        .transition-shadow {
+            transition: box-shadow 0.3s ease;
+        }
+
+        .transition-shadow:hover {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+    <header class="bg-gray-800 text-white p-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold fade-in">My Digital Space</h1>
+            <nav>
+                <ul class="flex space-x-8">
+                    <li><a href="index.html" class="hover:text-indigo-500">Home</a></li>
+                    <li><a href="about.html" class="hover:text-indigo-500">About</a></li>
+                    <li><a href="blog.html" class="hover:text-indigo-500">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Section -->
+    <section class="bg-gray-800 py-16 px-6">
+        <h2 class="text-3xl font-semibold text-center text-white mb-8 fade-in">Stories from My World</h2>
+        <div class="container mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Blog Post 1 -->
+            <div class="bg-gray-700 p-6 rounded-lg shadow-lg transition-shadow fade-in">
+                <h3 class="text-xl font-semibold mb-4">Gen Z Girl's True Love Across 1920s | Part I</h3>
+                <p class="text-gray-300 mb-4">A tale of love that blossomed across time, yet ended too soon...</p>
+                <a href="blog-post1.html" class="text-indigo-500 hover:text-indigo-400">Read More</a>
+            </div>
+
+            <!-- Blog Post 2 -->
+            <div class="bg-gray-700 p-6 rounded-lg shadow-lg transition-shadow fade-in">
+                <h3 class="text-xl font-semibold mb-4">The man with brown umbrella</h3>
+                <p class="text-gray-300 mb-4">A family’s journey into a house with a dark past. Things aren’t always as
+                    they seem...</p>
+                <a href="blog-post2.html" class="text-indigo-500 hover:text-indigo-400">Read More</a>
+            </div>
+
+            <!-- Blog Post 3 -->
+            <div class="bg-gray-700 p-6 rounded-lg shadow-lg transition-shadow fade-in">
+                <h3 class="text-xl font-semibold mb-4">pending ...</h3>
+                <p class="text-gray-300 mb-4">pending ...
+                </p>
+                <a href="blog-post3.html" class="text-indigo-500 hover:text-indigo-400">Read More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-6 text-center">
+        <p>&copy; 2025 My Digital Space. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

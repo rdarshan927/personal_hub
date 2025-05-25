@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>True Love Across Time - Blog Post</title>
+    <script src="https://unpkg.com/alpinejs@3.13.0" defer></script>
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Special+Elite&display=swap">
+    <style>
+        :root {
+            --vintage-cream: #F8F0E3;
+            --vintage-brown: #8B4513;
+            --vintage-gold: #D4AF37;
+            --vintage-burgundy: #800020;
+            --vintage-navy: #000080;
+            --vintage-green: #006400;
+            --vintage-paper: #F2E8C9;
+        }
+
+        body {
+            background-color: var(--vintage-paper);
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d0c8b0' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            color: #452F21;
+            font-family: 'Playfair Display', serif;
+        }
+
+        header,
+        footer {
+            background-color: var(--vintage-burgundy);
+            color: var(--vintage-cream);
+        }
+
+        .serif-title {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        .typewriter-text {
+            font-family: 'Special Elite', cursive;
+            line-height: 1.6;
+        }
+
+        .vintage-card {
+            background-color: var(--vintage-cream);
+            border: 1px solid #8B4513;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1), 0 0 40px rgba(139, 69, 19, 0.1) inset;
+        }
+
+        .vintage-border {
+            border: 2px solid var(--vintage-brown);
+            border-radius: 0;
+            position: relative;
+        }
+
+        .vintage-border::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid var(--vintage-gold);
+            pointer-events: none;
+        }
+
+        .vintage-button {
+            background-color: var(--vintage-burgundy);
+            color: var(--vintage-cream);
+            border: 1px solid var(--vintage-gold);
+            transition: all 0.3s ease;
+        }
+
+        .vintage-button:hover {
+            background-color: var(--vintage-cream);
+            color: var(--vintage-burgundy);
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .vintage-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--vintage-gold), transparent);
+            margin: 2rem auto;
+            width: 80%;
+        }
+
+        .ornament {
+            font-size: 2rem;
+            color: var(--vintage-gold);
+        }
+
+        .transition-shadow {
+            transition: box-shadow 0.3s ease;
+        }
+
+        .transition-shadow:hover {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .fade-in-delay {
+            animation: fadeIn 1.5s ease-in-out 0.5s;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+    <!-- Header Section -->
+    <header class="bg-gray-800 text-white p-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold fade-in">My Digital Space</h1>
+            <nav>
+                <ul class="flex space-x-8">
+                    <li><a href="index.html" class="hover:text-indigo-500">Home</a></li>
+                    <li><a href="about.html" class="hover:text-indigo-500">About</a></li>
+                    <li><a href="blog.html" class="hover:text-indigo-500">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Post Section -->
+    <section class="bg-gray-800 py-16 px-6">
+        <div class="container mx-auto max-w-4xl text-white">
+            <!-- Blog Post Title -->
+            <h2 class="text-4xl font-bold text-center mb-8 fade-in">Gen Z Girl's True Love Across 1920s | Part I</h2>
+
+            <!-- Author and Date -->
+            <div class="text-center mb-8 text-gray-400">
+                <p>By Darshan R | February 10, 2025</p>
+            </div>
+
+            <!-- Story Content -->
+            <div class="text-xl space-y-6">
+                <p class="vintage-text">
+                    It was 2025, a year when people had fallen into the era of AI. It was a time when anyone found it hard to build a genuine relationship. Our main character wasn't an exception. Let's call her Gisali, a 22-year-old Gen Z girl attending university for her higher studies. As the AI era had already taken off, Gisali felt compelled to make it more reliable, so she enrolled in a Data Science degree. She was good at her studies, and her grades were above average. Yet, despite everything seeming perfect, she struggled with her introverted personality. Her circle of friends was small, and she rarely spoke to them.
+                </p>
+
+                <p class="vintage-text">
+                    One usual day, after returning from university, Gisali made her meal and took a bath. She felt a little dizzy, having skipped meals that day. While changing clothes, she noticed something shining behind her cupboard. She remembered that the house owner hadn't repaired the hole in the wall behind it. She couldn't be angry; the owner was an old woman who managed everything herself. Few people stayed with her, but she let Gisali have the room alone for half the rent. She was the kindest person Gisali had ever met.
+                </p>
+
+                <p class="vintage-text">
+                    Ignoring the shine for now, Gisali went to the kitchen, but her plate slipped from her hand and broke. She couldn't blame herself—she was dizzy—but she did anyway. With no choice, she ate her ramen from a coffee cup. After finishing, she cleaned up the mess. Suddenly, she heard her name called at the front door. It was the house owner, who greeted her with a warm smile and gave her a piece of cake, saying it was her birthday. Gisali realized she had forgotten the owner's birthday. Dizzy, she simply closed the door, ate the cake, and felt even more tired. She didn't make it to the bed, collapsing near the cupboard and falling unconscious for half an hour.
+                </p>
+
+                <p class="vintage-text">
+                    When she awoke, she saw something shining like a star behind the cupboard. It reminded her of her first love, which hadn't lasted even a night. She recalled a beautiful text message she once read under the moonlight. Even if it was brief, it was a beautiful feeling that lightened her heart and made her feel as if she had wings. She whispered, "I just want an eternal sleep," not caring if these were her last moments. And then she fell asleep.
+                </p>
+
+                <p class="vintage-text">
+                    Morning came, and her mobile had been ringing for an hour. "Oh, I'm still breathing," she thought. Life wouldn't let her go so easily. She remembered she had an interview that morning. "Oh my god, I should have remembered this earlier!" She rushed to get ready, realizing only 15 minutes remained for the bus—the only one that passed her road. She skipped breakfast as usual. With two minutes left, she remembered the shining object behind the cupboard. Curiosity piqued, she peeked behind it and found a box, golden and dusty, with a password lock and a hint: "Near the Moon." She tried "star" as the password, and it worked. Inside was a clock set to January 1, 1920, with an inscription: "Time waits for no one, but love can bend it." There was a button below, and without thinking, she pressed it.
+                </p>
+
+                <p class="vintage-text">
+                    With a simple twist of the dial, Gisali was transported back to the 1920s, a time where everything seemed simpler, yet filled with a different kind of magic. She found herself standing on the bustling streets of a British city. Surrounded by the fog that often blanketed the city streets, Gisali stepped into a world filled with the rhythmic pulse of jazz from hidden clubs and the clatter of motorcars on cobblestone roads. The air was thick with the scents of tobacco, freshly brewed tea, and the unmistakable scent of change. This was London—or perhaps Manchester—during the 1920s. It was a city on the edge of something new, a time of roaring optimism, where the old met the new in a swirl of flapper dresses, sharp suits, and prohibition-era speakeasies. The energy was electric; the streets alive with the youthful vibrance of a society still healing from the aftermath of war, yet bursting with creative energy.
+                </p>
+
+                <p class="vintage-text">
+                    The days seemed to stretch into something timeless. Gisali wandered through parks, danced under the neon lights, and shared secrets in the quiet corners of old coffee shops. She met a young man named Jack, whose laughter was infectious and whose kindness reminded her of home. With each passing moment, she found herself falling deeper for Jack—but there was one problem. She wasn’t supposed to be here. The pocket watch had brought her to the past, but time was never meant to bend this way.
+                </p>
+
+                <p class="vintage-text">
+                    As the days turned into weeks, Gisali realized she had to make a choice. She could stay in the past with Jack, live the life of someone who truly belonged there, or she could return to the future, leaving behind the one person who made her feel alive. In the end, the choice wasn’t easy.
+                </p>
+
+                <p class="vintage-text">
+                    One evening, as they watched the sunset together, Jack held her hand and whispered, “No matter where you go, you’ll always be a part of me. And I’ll be a part of you. Even if time separates us, love doesn’t follow the rules.”
+                </p>
+
+                <p class="vintage-text">
+                    Gisali closed her eyes, feeling the warmth of his hand and the certainty of his words. She knew she had to go back to her time. But as she twisted the pocket watch’s dial one last time, she made a silent promise to Jack: they would always find each other, no matter where—or when—they were.
+                </p>
+
+                <p class="vintage-text">
+                    As time returned to its natural course, Gisali found herself back in 2025, the morning sun streaming through her window. The golden box was still in her hand, the dial now set to the present. She felt changed—her heart fuller, her spirit lighter. She knew that love, once found, could never truly be lost, even across the boundaries of time.
+                </p>
+
+                <p class="vintage-text">
+                    From that day on, Gisali lived with a new sense of hope. She cherished every moment, believing that somewhere, in another time or place, Jack was thinking of her too. And sometimes, on quiet nights, she would look up at the moon and the nearest star, smiling at the memory of a love that had truly transcended time.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-6 text-center">
+        <p>&copy; 2025 My Digital Space. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - My Digital Space</title>
+    <script src="https://unpkg.com/alpinejs@3.13.0" defer></script>
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Special+Elite&display=swap">
+    <style>
+        :root {
+            --vintage-cream: #F8F0E3;
+            --vintage-brown: #8B4513;
+            --vintage-gold: #D4AF37;
+            --vintage-burgundy: #800020;
+            --vintage-navy: #000080;
+            --vintage-green: #006400;
+            --vintage-paper: #F2E8C9;
+        }
+
+        body {
+            background-color: var(--vintage-paper);
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d0c8b0' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            color: #452F21;
+            font-family: 'Playfair Display', serif;
+        }
+
+        header,
+        footer {
+            background-color: var(--vintage-burgundy);
+            color: var(--vintage-cream);
+        }
+
+        .serif-title {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        .typewriter-text {
+            font-family: 'Special Elite', cursive;
+            line-height: 1.6;
+        }
+
+        .vintage-card {
+            background-color: var(--vintage-cream);
+            border: 1px solid #8B4513;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1), 0 0 40px rgba(139, 69, 19, 0.1) inset;
+        }
+
+        .vintage-border {
+            border: 2px solid var(--vintage-brown);
+            border-radius: 0;
+            position: relative;
+        }
+
+        .vintage-border::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid var(--vintage-gold);
+            pointer-events: none;
+        }
+
+        .vintage-button {
+            background-color: var(--vintage-burgundy);
+            color: var(--vintage-cream);
+            border: 1px solid var(--vintage-gold);
+            transition: all 0.3s ease;
+        }
+
+        .vintage-button:hover {
+            background-color: var(--vintage-cream);
+            color: var(--vintage-burgundy);
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .vintage-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--vintage-gold), transparent);
+            margin: 2rem auto;
+            width: 80%;
+        }
+
+        .ornament {
+            font-size: 2rem;
+            color: var(--vintage-gold);
+        }
+
+        .transition-shadow {
+            transition: box-shadow 0.3s ease;
+        }
+
+        .transition-shadow:hover {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .fade-in-delay {
+            animation: fadeIn 1.5s ease-in-out 0.5s;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+    <!-- Header Section -->
+    <header class="bg-gray-800 text-white p-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold fade-in">My Digital Space</h1>
+            <nav>
+                <ul class="flex space-x-8">
+                    <li><a href="index.html" class="hover:text-indigo-500">Home</a></li>
+                    <li><a href="about.html" class="hover:text-indigo-500">About</a></li>
+                    <li><a href="blog.html" class="hover:text-indigo-500">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section for About Page -->
+    <section
+        class="bg-gradient-to-r from-blue-500 to-indigo-600 py-20 text-center h-screen flex items-center justify-center relative">
+        <div class="absolute inset-0 bg-black opacity-40"></div> <!-- Background overlay -->
+
+        <div class="container mx-auto text-center relative z-10">
+            <!-- Profile Image -->
+            <div class="mb-8">
+                <img src="https://rdarshan927.github.io/images/rdarshan927.jpeg" alt="Your Profile"
+                    class="w-48 h-48 rounded-full mx-auto shadow-lg transition-shadow hover:shadow-2xl fade-in">
+            </div>
+
+            <!-- Short Introduction Text -->
+            <h2 class="text-4xl font-semibold mb-4 text-white drop-shadow-lg fade-in">About Me</h2>
+            <p class="text-xl mb-8 text-gray-200 fade-in-delay drop-shadow-lg">Welcome to my personal corner of the
+                internet! This isn’t about my professional life or my tech achievements. No, this space is all about me,
+                the person behind the screen, and the thoughts I have during my free time. It’s where I share stories,
+                ideas, and everything that inspires me. A place to relax and reflect on life, independent of the tech
+                world I live in every day.</p>
+
+            <!-- Personal Space -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg fade-in">
+                <h3 class="text-xl font-semibold">My Digital Space:</h3>
+                <p class="text-gray-200">
+                    This page is my independent space where I can unwind, share my stories, and express my personal
+                    thoughts. Whether it’s a nostalgic memory, a random thought, or just something I find interesting,
+                    this is my place to share what truly matters to me, outside of my professional life. I hope you
+                    enjoy reading through my musings, and maybe even find a bit of inspiration along the way.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-6 text-center fixed bottom-0 left-0 w-full">
+        <p>&copy; 2025 My Digital Space. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
